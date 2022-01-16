@@ -1,0 +1,21 @@
+{% extends 'basePages/base.html'%}
+
+{% block head %}
+    <title>Reg</title>
+{%  endblock %}
+
+
+{% block body %}
+<h3>Registration</h3>
+<form action="" method="POST">
+    {% csrf_token %}
+<!--    {{form.as_p}}-->
+     {% for field in form %}
+        {{field.label}}{{field}}<br/>
+    <br/>
+    {% endfor %}
+    {{form.errors}}
+    <input type="submit" name="Create">
+</form>
+
+{% endblock%}

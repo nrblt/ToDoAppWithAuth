@@ -1,0 +1,40 @@
+{%  extends 'base.html' %}
+
+{% block head %}  <title>Task</title>
+
+
+{% endblock%}
+
+{% block body %}
+<!--{{request.user}}-->
+<div>
+    {{request.user}}
+    <a href="{% url 'logout' %}">logout</a>
+</div>
+<form action="/" method="POST" class="ml-3">
+    {% csrf_token %}
+    {{form.title}}
+
+    <input type="submit" name="Create Task" value="Create">
+</form>
+
+{% for list in object%}
+<div class="mt-4 pl-2">
+    <a href="{% url 'update_task' list.id %}">Update</a>
+    <a href="{% url 'delete_task' list.id %}">Delete</a>
+
+    <div>
+    {{list.title}}
+<!--    {{list.complete}}-->
+        {% if list.complete %}
+            <span class="text-primary">Done</span>
+
+        {% else %}
+            <span class="text-danger">Not completed</span>
+        {% endif %}
+        </div>
+    </div>
+<hr>
+{% endfor %}
+{% endblock %}
+
